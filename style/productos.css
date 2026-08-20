@@ -50,6 +50,10 @@ body {
   list-style: none;
 }
 
+.sidebar nav ul li {
+  margin-bottom: 4px;
+}
+
 .sidebar nav a {
   display: block;
   padding: 12px 14px;
@@ -74,4 +78,8 @@ main {
 
 main h2 {
   margin: 0 0 20px;
+}
+
+.link-activo {
+  background-color: var(--primario-hover);
 }

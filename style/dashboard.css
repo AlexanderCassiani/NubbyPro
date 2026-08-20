@@ -50,6 +50,10 @@ body {
   list-style: none;
 }
 
+.sidebar nav ul li {
+  margin-bottom: 4px;
+}
+
 .sidebar nav a {
   display: block;
   padding: 12px 14px;
@@ -127,4 +131,8 @@ main h2 {
   font-size: 32px;
   font-weight: 700;
   color: white;
+}
+
+.link-activo {
+  background-color: var(--primario-hover);
 }
