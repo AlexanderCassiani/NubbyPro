@@ -1,2 +1,0 @@
-# NubbyPro
-Sistema de inventario
