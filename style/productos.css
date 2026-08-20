@@ -83,3 +83,35 @@ main h2 {
 .link-activo {
   background-color: var(--primario-hover);
 }
+
+main header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main header button {
+  border: 0;
+  border-radius: 8px;
+  padding: 12px 14px;
+  background-color: var(--color-primario);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+main header button:hover {
+  background-color: var(--primario-hover);
+  transform: translateY(-2px);
+}
+
+main header button:active {
+  transform: translateY(0);
+}
