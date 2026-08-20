@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NubbyPro - Sistema de inventario</title>
+    <link rel="stylesheet" href="inventario.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <h1>NubbyPro</h1>
+        <nav>
+          <ul>
+            <li>
+              <a class="link-btn" id="mostrar-dashboard">Dashboard</a>
+            </li>
+            <li>
+              <a class="link-btn" id="mostrar-productos">Productos</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="dashboard">
+        <h2>Dashboard</h2>
+        <div class="contenedor-tarjetas">
+          <div class="tarjeta">
+            <div>
+              <img src="icon/totalProducto.png" alt="Total de productos" />
+              <strong>Productos</strong>
+            </div>
+            <span>50</span>
+          </div>
+          <div class="tarjeta">
+            <div>
+              <img src="icon/enStock.png" alt="Producto en stock" />
+              <strong>En stock</strong>
+            </div>
+            <span>30</span>
+          </div>
+          <div class="tarjeta">
+            <div>
+              <img src="icon/stockBajo.png" alt="Stock bajo" />
+              <strong>Stock bajo</strong>
+            </div>
+            <span>10</span>
+          </div>
+          <div class="tarjeta">
+            <div>
+              <img src="icon/agotado.png" alt="Producto agotado" />
+              <strong>Agotado</strong>
+            </div>
+            <span>5</span>
+          </div>
+        </div>
+      </main>
+
+      <main class="producto">
+        <header>
+          <h2>Productos</h2>
+          <button id="btn-producto">
+            <img src="icon/agregarProducto.svg" alt="Agregar producto" />
+            Agregar producto
+          </button>
+        </header>
+
+        <table id="tabla">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Categoría</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+
+        <div class="overlay">
+          <div class="modal">
+            <h2>Agregar producto</h2>
+            <div>
+              <label for="id">Id:</label>
+              <input
+                type="number"
+                class="input"
+                id="id"
+                placeholder="Ejem: 0001"
+              />
+            </div>
+            <div>
+              <label for="nombre">Nombre: </label>
+              <input
+                type="text"
+                id="nombre"
+                class="input"
+                placeholder="Lavadora"
+              />
+            </div>
+            <div>
+              <label for="categoria">Categoría: </label>
+              <select id="categoria" value="Seleccionar categoría">
+                <option value="electrodomestico">Electrodomésticos</option>
+                <option value="ropa">Ropa</option>
+                <option value="calzado">Calzado</option>
+                <option value="videojuegos">Videojuegos</option>
+                <option value="accesorio">Accesorio</option>
+              </select>
+            </div>
+            <div>
+              <label for="precio">Precio: </label>
+              <input
+                type="number"
+                class="input"
+                id="precio"
+                min="0"
+                placeholder="1000000"
+              />
+            </div>
+            <div>
+              <label for="cantidad">Cantidad: </label>
+              <input
+                type="number"
+                class="input"
+                id="cantidad"
+                min="0"
+                placeholder="10"
+              />
+            </div>
+            <button id="agregar-producto">Agregar producto</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
