@@ -15,6 +15,11 @@ const tbody = tablaProductos.querySelector("tbody");
 
 const agregarProductoBtn = document.getElementById("agregar-producto");
 
+const totalDeProductos = document.getElementById("total-productos");
+const precioTotalInventario = document.getElementById("precio-total");
+const stockBajo = document.getElementById("stock-bajo");
+const productosAgotados = document.getElementById("agotado");
+
 const productos = [
   {
     id: "0001",
@@ -106,6 +111,33 @@ inputs.forEach((input) => {
   });
 });
 
+// actualiza el valor de las tarjetas del dashboard
+function actualizarDatosDashboard() {
+  // actualizar el total de productos con la longitud del array de productos
+  totalDeProductos.textContent = productos.length;
+
+  // actualizar el precio total del inventario con la suma de los precios de los productos multiplicados por su cantidad
+  let precioTotal = 0;
+  productos.forEach((producto) => {
+    precioTotal += producto.precio * producto.cantidad;
+  });
+  precioTotalInventario.textContent = `$${Intl.NumberFormat("es-CO").format(precioTotal)}`;
+
+  // actualizar el stock bajo con la cantidad de productos que tenga la cantidad menor a 5
+  const productosConStockBajo = productos.filter(
+    (producto) => producto.cantidad <= 5 && producto.cantidad > 0,
+  ).length;
+  stockBajo.textContent = productosConStockBajo;
+
+  // actualizar el total de productos agotados con la cantidad de productos que tenga la cantidad igual a 0
+  const totalAgotados = productos.filter(
+    (producto) => producto.cantidad === 0,
+  ).length;
+  productosAgotados.textContent = totalAgotados;
+}
+
+actualizarDatosDashboard();
+
 // mostrar en la tabla los 5 productos
 function renderizarProductosIniciales() {
   productos.forEach((producto) => {
@@ -157,6 +189,7 @@ function crearProducto() {
   agregarProductoATabla(nuevoProducto);
   cerrarModal();
   limpiarInputs();
+  actualizarDatosDashboard();
 }
 
 // limpiar los inputs despues de agregar un producto
