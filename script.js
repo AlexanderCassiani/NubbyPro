@@ -4,7 +4,6 @@ const dashboard = document.querySelector(".dashboard");
 const producto = document.querySelector(".producto");
 
 const overlay = document.querySelector(".overlay");
-const modal = document.querySelector(".modal");
 
 const inputs = document.querySelectorAll(".input");
 
@@ -123,7 +122,7 @@ function actualizarDatosDashboard() {
   });
   precioTotalInventario.textContent = `$${Intl.NumberFormat("es-CO").format(precioTotal)}`;
 
-  // actualizar el stock bajo con la cantidad de productos que tenga la cantidad menor a 5
+  // se considera stock bajo cuando la cantidad del producto esta entre 0 y 5
   const productosConStockBajo = productos.filter(
     (producto) => producto.cantidad <= 5 && producto.cantidad > 0,
   ).length;
@@ -166,14 +165,27 @@ function agregarProductoATabla(producto) {
 }
 
 function crearProducto() {
-  const id = document.getElementById("id").value;
-  const nombre = document.getElementById("nombre").value;
-  const categoria = document.getElementById("categoria").value;
-  const precio = Number(document.getElementById("precio").value);
-  const cantidad = document.getElementById("cantidad").value;
+  const id = document.getElementById("id").value.trim();
+  const nombre = document.getElementById("nombre").value.trim();
+  const categoria = document.getElementById("categoria").value.trim();
+  const precio = Number(document.getElementById("precio").value.trim());
+  const cantidad = document.getElementById("cantidad").value.trim();
 
-  if (!id || !nombre || !categoria || precio <= 0 || !cantidad) {
-    alert("Por favor, complete todos los campos");
+  if (
+    !id ||
+    !nombre ||
+    !categoria ||
+    precio <= 0 ||
+    !cantidad ||
+    cantidad < 0
+  ) {
+    alert("Por favor, complete todos los campos correctamente");
+    return;
+  }
+
+  const existeProducto = productos.find((producto) => producto.id === id);
+  if (existeProducto) {
+    alert("El ID del producto ya existe. Por favor, ingrese un ID único.");
     return;
   }
 
@@ -200,6 +212,9 @@ function limpiarInputs() {
   document.getElementById("precio").value = "";
   document.getElementById("cantidad").value = "";
 }
+
+// TODO: validar la longitud de los inputs
+function validarLongitudInputs() {}
 
 overlay.addEventListener("click", (e) => {
   // cerrar el modal al darle click al overlay (al fondo gris)
