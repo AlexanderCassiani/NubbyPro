@@ -15,10 +15,7 @@ const tbody = tablaProductos.querySelector("tbody");
 
 const agregarProductoBtn = document.getElementById("agregar-producto");
 
-// almacenar todos los productos
-const productos = [];
-
-const productosIniciales = [
+const productos = [
   {
     id: "0001",
     nombre: "Lavadora",
@@ -53,8 +50,8 @@ const productosIniciales = [
     categoria: "accesorio",
     precio: 5000000,
     cantidad: 0,
-  }
-]
+  },
+];
 
 function mostrarDashboard() {
   producto.style.display = "none";
@@ -91,7 +88,6 @@ function cerrarModal() {
 
 inputs.forEach((input) => {
   input.addEventListener("keydown", (e) => {
-
     // obtener el tipo del input
     const tipoDeInput = input.getAttribute("type");
 
@@ -110,52 +106,38 @@ inputs.forEach((input) => {
   });
 });
 
-// renderiza 5 productos en la tabla
-function cargarProductosIniciales() {
-  
-  productosIniciales.map(producto => {
-    const nuevaFila = document.createElement("tr");
-    
-    const {id, nombre, categoria, precio, cantidad} = producto;
-
-    nuevaFila.innerHTML = `
-      <td>${id}</td>
-      <td>${nombre}</td>
-      <td>${categoria}</td>
-      <td>${precio}</td>
-      <td>${cantidad}</td>
-    `;
-    tbody.appendChild(nuevaFila);
-  })
+// mostrar en la tabla los 5 productos
+function renderizarProductosIniciales() {
+  productos.forEach((producto) => {
+    agregarProductoATabla(producto);
+  });
 }
 
-cargarProductosIniciales();
+renderizarProductosIniciales();
 
-function renderizarProductos({id, nombre, categoria, precio, cantidad}) {
+// agregar un producto a la tabla
+function agregarProductoATabla(producto) {
   const nuevaFila = document.createElement("tr");
-  productos.map(producto => {
-    
-    const {id, nombre, categoria, precio, cantidad} = producto;
 
-    nuevaFila.innerHTML = `
-      <td>${id}</td>
-      <td>${nombre}</td>
-      <td>${categoria}</td>
-      <td>${precio}</td>
-      <td>${cantidad}</td>
+  nuevaFila.innerHTML = `
+      <td>${producto.id}</td>
+      <td>${producto.nombre}</td>
+      <td>${producto.categoria}</td>
+      <td>${producto.precio}</td>
+      <td>${producto.cantidad}</td>
     `;
-    tbody.appendChild(nuevaFila);
-  })
+
+  tbody.appendChild(nuevaFila);
 }
 
 function crearProducto() {
   const id = document.getElementById("id").value;
   const nombre = document.getElementById("nombre").value;
   const categoria = document.getElementById("categoria").value;
-  const precio = document.getElementById("precio").value;
+  const precio = Number(document.getElementById("precio").value);
   const cantidad = document.getElementById("cantidad").value;
 
-  if (!id || !nombre || !categoria || !precio || !cantidad) {
+  if (!id || !nombre || !categoria || precio <= 0 || !cantidad) {
     alert("Por favor, complete todos los campos");
     return;
   }
@@ -165,11 +147,22 @@ function crearProducto() {
     nombre,
     categoria,
     precio,
-    cantidad
-  }
+    cantidad,
+  };
 
   productos.push(nuevoProducto);
-  renderizarProductos(nuevoProducto);
+  agregarProductoATabla(nuevoProducto);
+  cerrarModal();
+  limpiarInputs();
+}
+
+// limpiar los inputs despues de agregar un producto
+function limpiarInputs() {
+  document.getElementById("id").value = "";
+  document.getElementById("nombre").value = "";
+  document.getElementById("categoria").value = "";
+  document.getElementById("precio").value = "";
+  document.getElementById("cantidad").value = "";
 }
 
 overlay.addEventListener("click", (e) => {
@@ -185,7 +178,4 @@ btnProducto.addEventListener("click", () => {
 
 agregarProductoBtn.addEventListener("click", () => {
   crearProducto();
-  cerrarModal();
 });
-
-agregarProductoBtn.addEventListener("click", crearProducto);
