@@ -119,11 +119,14 @@ renderizarProductosIniciales();
 function agregarProductoATabla(producto) {
   const nuevaFila = document.createElement("tr");
 
+  // formatear el precio
+  const precioFormateado = Intl.NumberFormat("es-CO").format(producto.precio);
+
   nuevaFila.innerHTML = `
       <td>${producto.id}</td>
       <td>${producto.nombre}</td>
       <td>${producto.categoria}</td>
-      <td>${producto.precio}</td>
+      <td>$${precioFormateado}</td>
       <td>${producto.cantidad}</td>
     `;
 
