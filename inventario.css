@@ -52,7 +52,9 @@ body {
 
 .sidebar nav ul li {
   cursor: pointer;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  background-color: #2564eb44;
+  border-radius: 8px;
 }
 
 .sidebar nav a {
@@ -150,6 +152,10 @@ main h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.producto header h2 {
+  margin: 0;
 }
 
 .producto header button {
