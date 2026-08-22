@@ -55,22 +55,25 @@ body {
   margin-bottom: 6px;
   background-color: #2564eb44;
   border-radius: 8px;
-}
-
-.sidebar nav a {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 5px;
   padding: 12px 14px;
-  border-radius: 8px;
-  color: white;
-  font-size: 18px;
-  font-weight: 600;
-  text-decoration: none;
   transition:
     background-color 0.2s ease,
     transform 0.2s ease;
 }
 
-.sidebar nav a:hover {
+.sidebar nav a {
+  display: block;
+  border-radius: 8px;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.sidebar nav li:hover {
   background-color: var(--primario-hover);
   transform: translateX(4px);
 }
@@ -83,13 +86,23 @@ main h2 {
   margin: 0 0 20px;
 }
 
+.contenedor-logo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logo {
+  width: 38px;
+}
+
 .inventario {
   display: none;
 }
 
 .contenedor-tarjetas {
-  display: grid;
-  grid-template-columns: repeat(4, auto);
+  display: flex;
+  flex-wrap: wrap;
   gap: 16px;
 }
 
@@ -114,23 +127,19 @@ main h2 {
 }
 
 .contenedor-tarjetas .tarjeta:nth-child(1) {
+  max-width: 280px;
   background-color: var(--exito);
+  flex-grow: 1;
 }
 
 .contenedor-tarjetas .tarjeta:nth-child(2) {
+  max-width: 400px;
   background-color: var(--color-primario);
-}
-
-.contenedor-tarjetas .tarjeta:nth-child(3) {
-  background-color: var(--advertencia);
-}
-
-.contenedor-tarjetas .tarjeta:nth-child(4) {
-  background-color: var(--error);
+  flex-grow: 1;
 }
 
 .tarjeta strong {
-  font-size: 14px;
+  font-size: 18px;
   color: white;
 }
 
@@ -275,6 +284,38 @@ table {
   overflow: hidden;
   border: 1px solid #e2e8f0;
   background-color: white;
+  table-layout: auto;
+  white-space: nowrap;
+}
+
+table th:nth-child(1),
+table td:nth-child(1) {
+  width: 70px;
+}
+
+table th:nth-child(2),
+table td:nth-child(2) {
+  width: auto;
+}
+
+table th:nth-child(3),
+table td:nth-child(3) {
+  width: 160px;
+}
+
+table th:nth-child(4),
+table td:nth-child(4) {
+  width: 120px;
+}
+
+table th:nth-child(5),
+table td:nth-child(5) {
+  width: 100px;
+}
+
+table th:nth-child(6),
+table td:nth-child(6) {
+  width: 130px;
 }
 
 table th {
