@@ -19,6 +19,8 @@ const precioTotalInventario = document.getElementById("precio-total");
 const stockBajo = document.getElementById("stock-bajo");
 const productosAgotados = document.getElementById("agotado");
 
+const inputsNumeros = document.querySelectorAll(".numero");
+
 const productos = [
   {
     id: "0001",
@@ -187,6 +189,7 @@ function crearProducto() {
   const precio = Number(document.getElementById("precio").value.trim());
   const cantidad = document.getElementById("cantidad").value.trim();
 
+  // validar que todos los campos esten completos y que el precio y la cantidad sean mayores a 0
   if (
     !id ||
     !nombre ||
@@ -199,6 +202,7 @@ function crearProducto() {
     return;
   }
 
+  // validar que el id del producto sea unico
   const existeProducto = productos.find((producto) => producto.id === id);
   if (existeProducto) {
     alert("El ID del producto ya existe. Por favor, ingrese un ID único.");
@@ -229,8 +233,16 @@ function limpiarInputs() {
   document.getElementById("cantidad").value = "";
 }
 
-// TODO: validar la longitud de los inputs
-function validarLongitudInputs() {}
+// validar que los inputs type number tengan una longitud maxima de 20 numeros
+inputsNumeros.forEach((input) => {
+  input.addEventListener("input", () => {
+    if (input.value.length > 20) {
+      input.value = input.value.slice(0, 20);
+
+      alert("El valor de los campos numericos debe de ser menor a 20 numeros");
+    }
+  });
+});
 
 overlay.addEventListener("click", (e) => {
   // cerrar el modal al darle click al overlay (al fondo gris)
