@@ -39,7 +39,7 @@ const productos = [
   {
     id: "0003",
     nombre: "Silla gamer",
-    categoria: "viedojuegos",
+    categoria: "videojuegos",
     precio: 200000,
     cantidad: 5,
   },
@@ -90,6 +90,13 @@ function mostrarModal() {
 
 function cerrarModal() {
   overlay.style.display = "none";
+
+  // limpiar los inputs al cerrar el modal
+  limpiarInputs();
+  // resetear el estado de las variables de edicion al cerrar el modal
+  estaEditando = false;
+  idProductoEditando = null;
+  agregarProductoBtn.textContent = "Agregar producto";
 }
 
 inputs.forEach((input) => {
@@ -182,6 +189,30 @@ function eliminarProducto(id) {
   actualizarDatosDashboard();
 }
 
+// variable para saber si se esta editando un producto
+let estaEditando = false;
+// guardar el id del producto que se esta editando
+let idProductoEditando = null;
+
+function editarProducto(id) {
+  estaEditando = true;
+
+  mostrarModal();
+  // encontrar el producto que se editar con el id
+  const producto = productos.find((producto) => producto.id === id);
+
+  // guardar el id del producto que se esta editando
+  idProductoEditando = producto.id;
+
+  document.getElementById("id").value = producto.id;
+  document.getElementById("nombre").value = producto.nombre;
+  document.getElementById("categoria").value = producto.categoria;
+  document.getElementById("precio").value = producto.precio;
+  document.getElementById("cantidad").value = producto.cantidad;
+
+  agregarProductoBtn.textContent = "Guardar cambios";
+}
+
 function crearProducto() {
   const id = document.getElementById("id").value.trim();
   const nombre = document.getElementById("nombre").value.trim();
@@ -202,25 +233,33 @@ function crearProducto() {
     return;
   }
 
-  // validar que el id del producto sea unico
-  const existeProducto = productos.find((producto) => producto.id === id);
-  if (existeProducto) {
-    alert("El ID del producto ya existe. Por favor, ingrese un ID único.");
-    return;
+  if (estaEditando) {
+    const indice = productos.findIndex(
+      (producto) => producto.id === idProductoEditando,
+    );
+    productos[indice] = { id, nombre, categoria, precio, cantidad };
+  } else {
+    // validar que el id del producto sea unico
+    const existeProducto = productos.find((producto) => producto.id === id);
+    if (existeProducto) {
+      alert("El ID del producto ya existe. Por favor, ingrese un ID único.");
+      return;
+    }
+
+    const nuevoProducto = {
+      id,
+      nombre,
+      categoria,
+      precio,
+      cantidad,
+    };
+
+    productos.push(nuevoProducto);
   }
 
-  const nuevoProducto = {
-    id,
-    nombre,
-    categoria,
-    precio,
-    cantidad,
-  };
-
-  productos.push(nuevoProducto);
-  agregarProductoATabla(nuevoProducto);
+  tbody.innerHTML = "";
+  renderizarProductos();
   cerrarModal();
-  limpiarInputs();
   actualizarDatosDashboard();
 }
 
