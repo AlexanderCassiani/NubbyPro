@@ -16,8 +16,6 @@ const agregarProductoBtn = document.getElementById("agregar-producto");
 
 const totalDeProductos = document.getElementById("total-productos");
 const precioTotalInventario = document.getElementById("precio-total");
-const stockBajo = document.getElementById("stock-bajo");
-const productosAgotados = document.getElementById("agotado");
 
 const inputsNumeros = document.querySelectorAll(".numero");
 
@@ -72,7 +70,7 @@ function mostrarProductos() {
 // navegacion entre dashborad y productos
 links.forEach((link) => {
   link.addEventListener("click", () => {
-    // obtener el id de los elementos a
+    // obtener el id de los elementos li
     const linkId = link.getAttribute("id");
 
     // si el id es mostrar-dashboard, llama a la función mostrarDashboard, si es mostrar-productos llama a la función mostrarProductos
@@ -130,18 +128,6 @@ function actualizarDatosDashboard() {
     precioTotal += producto.precio * producto.cantidad;
   });
   precioTotalInventario.textContent = `$${Intl.NumberFormat("es-CO").format(precioTotal)}`;
-
-  // se considera stock bajo cuando la cantidad del producto esta entre 0 y 5
-  const productosConStockBajo = productos.filter(
-    (producto) => producto.cantidad <= 5 && producto.cantidad > 0,
-  ).length;
-  stockBajo.textContent = productosConStockBajo;
-
-  // actualizar el total de productos agotados con la cantidad de productos que tenga la cantidad igual a 0
-  const totalAgotados = productos.filter(
-    (producto) => producto.cantidad === 0,
-  ).length;
-  productosAgotados.textContent = totalAgotados;
 }
 
 actualizarDatosDashboard();
