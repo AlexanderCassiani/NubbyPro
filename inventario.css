@@ -278,7 +278,7 @@ table {
 }
 
 table th {
-  padding: 14px 16px;
+  padding: 12px 4px;
   text-align: left;
   border: 1px solid #e2e8f0;
   background-color: #eff6ff;
@@ -291,6 +291,15 @@ table th {
 
 table td {
   font-size: 16px;
-  padding: 14px 16px;
+  padding: 8px 4px;
   border: 1px solid #e2e8f0;
+}
+
+table button {
+  border: 0;
+  background-color: transparent;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  margin-right: 8px;
 }

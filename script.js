@@ -138,13 +138,13 @@ function actualizarDatosDashboard() {
 actualizarDatosDashboard();
 
 // mostrar en la tabla los 5 productos
-function renderizarProductosIniciales() {
+function renderizarProductos() {
   productos.forEach((producto) => {
     agregarProductoATabla(producto);
   });
 }
 
-renderizarProductosIniciales();
+renderizarProductos();
 
 // agregar un producto a la tabla
 function agregarProductoATabla(producto) {
@@ -159,9 +159,25 @@ function agregarProductoATabla(producto) {
       <td>${producto.categoria}</td>
       <td>$${precioFormateado}</td>
       <td>${producto.cantidad}</td>
+      <td>
+        <button title="Editar producto" onclick="editarProducto('${producto.id}')">
+          <img src="icon/editar.svg" alt="Editar" />
+        </button>
+        <button title="Eliminar producto" onclick="eliminarProducto('${producto.id}')">
+          <img src="icon/eliminar.svg" alt="Eliminar" />
+        </button>
+      </td>
     `;
 
   tbody.appendChild(nuevaFila);
+}
+
+function eliminarProducto(id) {
+  const indice = productos.findIndex((producto) => producto.id === id);
+  productos.splice(indice, 1);
+  tbody.innerHTML = "";
+  renderizarProductos();
+  actualizarDatosDashboard();
 }
 
 function crearProducto() {
