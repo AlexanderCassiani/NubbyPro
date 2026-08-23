@@ -239,11 +239,13 @@ function agregarProductoATabla(producto) {
 }
 
 function eliminarProducto(id) {
-  const indice = productos.findIndex((producto) => producto.id === id);
-  productos.splice(indice, 1);
-  tbody.innerHTML = "";
-  renderizarProductos();
-  actualizarDatosDashboard();
+  if (confirm("Estas seguro de que quieres eliminar este producto?")) {
+    const indice = productos.findIndex((producto) => producto.id === id);
+    productos.splice(indice, 1);
+    tbody.innerHTML = "";
+    renderizarProductos();
+    actualizarDatosDashboard();
+  }
 }
 
 // variable para saber si se esta editando un producto
