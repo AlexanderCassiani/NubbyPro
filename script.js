@@ -19,6 +19,9 @@ const precioTotalInventario = document.getElementById("precio-total");
 
 const inputsNumeros = document.querySelectorAll(".numero");
 
+const busqueda = document.getElementById("filtro-nombre");
+const categoria = document.getElementById("filtro-categoria");
+
 const productos = [
   {
     id: "0001",
@@ -269,6 +272,28 @@ inputsNumeros.forEach((input) => {
   });
 });
 
+function filtrarProducto() {
+  const productosFiltrados = productos.filter((producto) => {
+    const filtroNombre = producto.nombre
+      .toLowerCase()
+      .includes(busqueda.value.toLowerCase().trim());
+
+    const filtroCategoria =
+      categoria.value === "todas" // si el select es todas devolvel todos los productos
+        ? producto
+        : producto.categoria === categoria.value;
+
+    // filtrar solo si el producto cumpla con ambos filtros
+    return filtroNombre && filtroCategoria;
+  });
+
+  tbody.innerHTML = "";
+
+  productosFiltrados.forEach((producto) => {
+    agregarProductoATabla(producto);
+  });
+}
+
 overlay.addEventListener("click", (e) => {
   // cerrar el modal al darle click al overlay (al fondo gris)
   if (e.target === overlay) {
@@ -283,3 +308,6 @@ btnProducto.addEventListener("click", () => {
 agregarProductoBtn.addEventListener("click", () => {
   crearProducto();
 });
+
+busqueda.addEventListener("input", filtrarProducto);
+categoria.addEventListener("input", filtrarProducto);
