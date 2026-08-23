@@ -23,7 +23,6 @@ body {
 .app {
   display: grid;
   grid-template-columns: 260px 1fr;
-  gap: 20px;
   min-height: 100vh;
 }
 
@@ -278,7 +277,6 @@ main h2 {
 
 table {
   width: 100%;
-  margin-top: 40px;
   border-collapse: separate;
   border-spacing: 0;
   overflow: hidden;
@@ -343,4 +341,29 @@ table button {
   width: 24px;
   cursor: pointer;
   margin-right: 8px;
+}
+
+.contenedor-filtros {
+  margin: 34px 0 18px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contenedor-filtros input {
+  padding: 5px;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #949aa3;
+  transition: border-color 0.2;
+}
+
+.contenedor-filtros input:focus {
+  border-color: var(--color-primario);
+}
+
+.contenedor-filtros select {
+  padding: 6px;
+  border-radius: 5px;
+  outline: none;
 }
