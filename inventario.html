@@ -9,6 +9,22 @@
   </head>
   <body>
     <div class="app">
+      <div class="contenedor-sidebar-mobile">
+        <button id="sidebar-mobile-btn">X</button>
+        <aside class="sidebar-mobile">
+          <nav>
+            <ul>
+              <li class="link-btn" id="mostrar-dashboard">
+                <a>Dashboard</a>
+              </li>
+              <li class="link-btn" id="mostrar-productos">
+                <a>Productos</a>
+              </li>
+            </ul>
+          </nav>
+        </aside>
+      </div>
+
       <aside class="sidebar">
         <div class="contenedor-logo">
           <img class="logo" src="icon/logo.png" alt="Logo de NubbyPro" />
@@ -79,19 +95,21 @@
           </select>
         </div>
 
-        <table id="tabla">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Nombre</th>
-              <th>Categoría</th>
-              <th>Precio</th>
-              <th>Cantidad</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="tbody"></tbody>
-        </table>
+        <div class="contenedor-tabla">
+          <table id="tabla">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
 
         <div class="overlay">
           <div class="modal">

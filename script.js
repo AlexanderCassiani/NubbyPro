@@ -24,6 +24,9 @@ const categoria = document.getElementById("filtro-categoria");
 
 const graficaCategoria = document.getElementById("grafica-categoria");
 
+const sibeBarMobileBtn = document.getElementById("sidebar-mobile-btn");
+const sidebarMobile = document.querySelector(".sidebar-mobile");
+
 const productos = [
   {
     id: "0001",
@@ -68,6 +71,10 @@ const productos = [
     cantidad: 3,
   },
 ];
+
+sibeBarMobileBtn.addEventListener("click", () => {
+  sidebarMobile.classList.toggle("mostrar-sidebar");
+});
 
 function mostrarDashboard() {
   producto.style.display = "none";
@@ -141,6 +148,10 @@ function crearGraficaCategoria() {
           data: datos.cantidades,
         },
       ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
     },
   });
 }
