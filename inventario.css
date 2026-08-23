@@ -350,12 +350,20 @@ table button {
   align-items: center;
 }
 
-.contenedor-filtros input {
-  padding: 5px;
+.contenedor-filtros input,
+.contenedor-filtros select {
+  padding: 6px 5px 6px 32px;
   outline: none;
   border-radius: 5px;
   border: 1px solid #949aa3;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position: 4px center;
+}
+
+.contenedor-filtros input {
   transition: border-color 0.2;
+  background-image: url(icon/filtroNombre.svg);
 }
 
 .contenedor-filtros input:focus {
@@ -363,7 +371,5 @@ table button {
 }
 
 .contenedor-filtros select {
-  padding: 6px;
-  border-radius: 5px;
-  outline: none;
+  background-image: url(icon/filtroCategoria.svg);
 }
