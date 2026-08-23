@@ -373,3 +373,11 @@ table button {
 .contenedor-filtros select {
   background-image: url(icon/filtroCategoria.svg);
 }
+
+.contenedor-graficas {
+  margin-top: 40px;
+}
+
+.contenedor-grafica-categoria {
+  height: 300px;
+}

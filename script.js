@@ -22,6 +22,8 @@ const inputsNumeros = document.querySelectorAll(".numero");
 const busqueda = document.getElementById("filtro-nombre");
 const categoria = document.getElementById("filtro-categoria");
 
+const graficaCategoria = document.getElementById("grafica-categoria");
+
 const productos = [
   {
     id: "0001",
@@ -58,6 +60,13 @@ const productos = [
     precio: 5000000,
     cantidad: 0,
   },
+  {
+    id: "0006",
+    nombre: "Pc Gamer ultima gen",
+    categoria: "videojuegos",
+    precio: 3000000,
+    cantidad: 3,
+  },
 ];
 
 function mostrarDashboard() {
@@ -85,6 +94,59 @@ links.forEach((link) => {
   });
 });
 
+function obtenerProductosPorCategoria() {
+  // guardar cuantas veces aparece la categoria
+  const cantidades = {};
+
+  productos.forEach((producto) => {
+    if (cantidades[producto.categoria]) {
+      cantidades[producto.categoria] += 1;
+    } else {
+      cantidades[producto.categoria] = 1;
+    }
+  });
+
+  // ordenar las categorias de mayor a menor
+  const categoriasOrdenadas = Object.entries(cantidades).sort(
+    (a, b) => b[1] - a[1],
+  );
+
+  // obtener solo las 5 categorias con mas productos
+  const top5 = categoriasOrdenadas.slice(0, 5);
+
+  // quedarse solo con la categoria
+  const categorias = top5.map((categoria) => categoria[0]);
+
+  //quedarce solo con la cantidad de productos
+  const cantidadesProductos = top5.map((categoria) => categoria[1]);
+
+  return {
+    categorias,
+    cantidades: cantidadesProductos,
+  };
+}
+
+function crearGraficaCategoria() {
+  const datos = obtenerProductosPorCategoria();
+
+  new Chart(graficaCategoria, {
+    type: "bar",
+
+    data: {
+      labels: datos.categorias,
+
+      datasets: [
+        {
+          label: "Cantidad de productos por categoria",
+          data: datos.cantidades,
+        },
+      ],
+    },
+  });
+}
+
+crearGraficaCategoria();
+
 function mostrarModal() {
   overlay.style.display = "flex";
 }
@@ -105,15 +167,10 @@ inputs.forEach((input) => {
     // obtener el tipo del input
     const tipoDeInput = input.getAttribute("type");
 
-    // hacer las validaciones de los inputs, si es number no permitir letras, si es text no permitir numeros
+    // validar que no se pueda escribir letras en los inputs de tipo numero
     if (tipoDeInput === "number") {
       const caracteresNoPermitidos = "abcdefghijklmnñopqrstuvwxyz-";
       if (caracteresNoPermitidos.includes(e.key) || input.value < 0) {
-        e.preventDefault();
-      }
-    } else if (tipoDeInput === "text") {
-      const caracteresNoPermitidos = "0123456789";
-      if (caracteresNoPermitidos.includes(e.key)) {
         e.preventDefault();
       }
     }
