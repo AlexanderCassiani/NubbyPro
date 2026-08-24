@@ -262,6 +262,8 @@ function eliminarProducto(id) {
     tbody.innerHTML = "";
     renderizarProductos();
     actualizarDatosDashboard();
+    // actualizar grafica al eliminar un produdcto
+    crearGraficaCategoria();
   }
 }
 
@@ -398,8 +400,6 @@ function crearCategoria() {
   document.getElementById("input-categoria").value = "";
 
   alert("Categoria agregada correctamente");
-
-  crearGraficaCategoria();
 }
 
 btnMostrarContenedorCategoria.addEventListener("click", () => {
