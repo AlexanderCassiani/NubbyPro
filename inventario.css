@@ -238,7 +238,7 @@ main h2 {
   padding: 10px 12px;
   border-radius: 8px;
   outline: none;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #c9d5e6;
   color: var(--texto-principal);
   font-size: 15px;
   transition: border-color 0.2s ease;
@@ -253,7 +253,7 @@ main h2 {
   border-color: var(--color-primario);
 }
 
-.modal button {
+.modal #agregar-producto {
   width: 100%;
   margin-top: 4px;
   padding: 12px 16px;
@@ -276,6 +276,53 @@ main h2 {
 
 .modal button:active {
   transform: translateY(0);
+}
+
+.modal .contenedor-crear-categoria {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.modal .contenedor-crear-categoria div {
+  display: flex;
+  align-items: center;
+}
+
+.modal .contenedor-crear-categoria div #btn-mostrar-contenedor-categoria {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.modal .contenedor-crear-categoria div {
+  margin: 0;
+}
+
+.modal .contenedor-crear-categoria div button:hover {
+  transform: translateY(-1px);
+}
+
+.modal #contenedor-nueva-categoria {
+  display: none;
+  align-items: center;
+}
+
+.modal #contenedor-nueva-categoria input {
+  max-width: 240px;
+  padding: 4px;
+  min-height: 10px;
+  font-size: 15px;
+}
+
+#agregar-categoria {
+  border: none;
+  background-color: var(--exito);
+  border-radius: 4px;
+  padding: 4px;
+  color: white;
+  transition: transform 0.2s;
 }
 
 table {

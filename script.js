@@ -27,6 +27,17 @@ const graficaCategoria = document.getElementById("grafica-categoria");
 const sibeBarMobileBtn = document.getElementById("sidebar-mobile-btn");
 const sidebarMobile = document.querySelector(".sidebar-mobile");
 
+const selectCategoria = document.getElementById("categoria");
+
+const contenedorNuevaCategoria = document.getElementById(
+  "contenedor-nueva-categoria",
+);
+const btnMostrarContenedorCategoria = document.getElementById(
+  "btn-mostrar-contenedor-categoria",
+);
+const inputCategoria = document.getElementById("input-categoria");
+const agregarCategoria = document.getElementById("agregar-categoria");
+
 const productos = [
   {
     id: "0001",
@@ -331,13 +342,13 @@ function limpiarInputs() {
   document.getElementById("cantidad").value = "";
 }
 
-// validar que los inputs type number tengan una longitud maxima de 20 numeros
-inputsNumeros.forEach((input) => {
+// validar que los inputs tengan una longitud maxima de 30 numeros
+inputs.forEach((input) => {
   input.addEventListener("input", () => {
-    if (input.value.length > 20) {
-      input.value = input.value.slice(0, 20);
+    if (input.value.length > 30) {
+      input.value = input.value.slice(0, 30);
 
-      alert("El valor de los campos numericos debe de ser menor a 20 numeros");
+      alert("El valor de los campos debe de ser menor a 30 numeros");
     }
   });
 });
@@ -363,6 +374,28 @@ function filtrarProducto() {
     agregarProductoATabla(producto);
   });
 }
+
+function crearCategoria() {
+  const nuevaCategoria = inputCategoria.value.trim();
+
+  selectCategoria.innerHTML += `
+  <option value="${nuevaCategoria}">${nuevaCategoria}</option>
+  `;
+
+  // agregar el nuevo filtro al select de filtros
+  document.getElementById("filtro-categoria").innerHTML += `
+  <option value="${nuevaCategoria}">${nuevaCategoria}</option>
+  `;
+
+  document.getElementById("input-categoria").value = "";
+
+  alert("Categoria agregada correctamente");
+}
+
+btnMostrarContenedorCategoria.addEventListener("click", () => {
+  contenedorNuevaCategoria.style.display = "flex";
+});
+agregarCategoria.addEventListener("click", crearCategoria);
 
 overlay.addEventListener("click", (e) => {
   // cerrar el modal al darle click al overlay (al fondo gris)
