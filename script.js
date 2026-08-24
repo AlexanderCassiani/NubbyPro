@@ -22,7 +22,7 @@ const inputsNumeros = document.querySelectorAll(".numero");
 const busqueda = document.getElementById("filtro-nombre");
 const categoria = document.getElementById("filtro-categoria");
 
-const graficaCategoria = document.getElementById("grafica-categoria");
+const graficaCategoriaCanvas = document.getElementById("grafica-categoria");
 
 const sibeBarMobileBtn = document.getElementById("sidebar-mobile-btn");
 const sidebarMobile = document.querySelector(".sidebar-mobile");
@@ -144,10 +144,16 @@ function obtenerProductosPorCategoria() {
   };
 }
 
+let graficaCategoria;
+
 function crearGraficaCategoria() {
   const datos = obtenerProductosPorCategoria();
 
-  new Chart(graficaCategoria, {
+  if (graficaCategoria) {
+    graficaCategoria.destroy();
+  }
+
+  graficaCategoria = new Chart(graficaCategoriaCanvas, {
     type: "bar",
 
     data: {
@@ -331,6 +337,8 @@ function crearProducto() {
   renderizarProductos();
   cerrarModal();
   actualizarDatosDashboard();
+  // actualizar la grafica
+  crearGraficaCategoria();
 }
 
 // limpiar los inputs despues de agregar un producto
@@ -390,6 +398,8 @@ function crearCategoria() {
   document.getElementById("input-categoria").value = "";
 
   alert("Categoria agregada correctamente");
+
+  crearGraficaCategoria();
 }
 
 btnMostrarContenedorCategoria.addEventListener("click", () => {
